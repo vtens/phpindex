@@ -1,11 +1,33 @@
-# PHPINDEX
-> PHPINDEX 是WINDOWS下WEB开发环境下默认INDEX文件列表的替换入口, 一直个人使用, 现在共享大家使用. 同时大家可以共同完善这个项目使之更好.
----
+#### 项目介绍
 
-==用法==
-- 下载index.php文件, 放入网站根目录即可.
-- APACHE配置文件(httpd.conf)修改3处
-1. Options Indexes FollowSymLinks (去掉Indexes)
-2. ErrorDocument 404 /?error (没有添加)
-3. ErrorDocument 403 /?error (没有添加)
-- 如果获取服务器局域网IP失败, 请自行检查exec函数是否开启?
+> phpindex 是替换php环境下默认主页的一种解决方案, 感兴趣朋友可以共同完善这个项目.
+
+#### 配置教程
+APACHE 配置修改 (httpd.conf)
+
+Options Indexes FollowSymLinks (去掉Indexes)
+
+ErrorDocument 404 /?error
+
+ErrorDocument 403 /?error
+
+NGINX 配置修改(nginx.conf)
+
+error_page 404 403 /?error;
+
+#### 使用说明
+
+直接下载此 index.php 文件至网站根目录即可, 子目录无需添加.
+
+#### 使用技巧
+
+1. @ 开头的文件夹, 会隐藏不显示
+2. 搜索框可以即时显示搜索的项目文件夹, 当显示为第一个时,直接回车即可打开.
+3. 密码登录功能,更好地保护你的项目. (密码为 123 + 当天星期几数字, 比如 1237)
+4. 非局域网用户禁止访问, 同时加入白名单wlist,允许部分外网或内网访问.
+5. 内网手机可以扫描二维码进行多平台测试.
+6. 404提示错误页面
+7. 403提示禁止访问
+8. 当项目下没有主页,会提醒创建主页
+9. 子目录深度为3层, 防止项目子目录过多问题, 优化你的项目
+10. 更多体验...
