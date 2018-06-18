@@ -1,10 +1,15 @@
 <?php
-/* PHPINDEX 185 ? https://vtens.com/phpindex
---------------------------------------------------
-# APACHE配置文件(httpd.conf)修改3处
-|--1, Options Indexes FollowSymLinks (去掉Indexes)
-|--2, ErrorDocument 404 /?error (没有添加)
-|--3, ErrorDocument 403 /?error (没有添加)
+/* =====================================
+PHPINDEX ? http://vtens.com/phpindex
+========================================
+|--APACHE 配置修改 (httpd.conf)
+|  |--Options Indexes FollowSymLinks (去掉Indexes)
+|  |--ErrorDocument 404 /?error
+|  |--ErrorDocument 403 /?error
+|
+|--NGINX 配置修改(nginx.conf)
+|  |--error_page 404 403 /?error;
+|
 */
 
 //初始化
@@ -14,7 +19,7 @@ $site = dirname($_SERVER['PHP_SELF']);
 
 //基本配置
 $pass = '123'.date('N'); //登录密码
-$h['version'] = 'PI185';
+$h['version'] = 'PI186';
 $h['jquery'] = "<script src='https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js'></script>"; //jquery
 $h['jqueryqrcode'] = "<script src='https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js'></script>"; //jquerycode
 $h['head'] = "<!DOCTYPE HTML><html><head><meta charset='utf-8'/><meta name='author' content='vtens.com'><meta name='viewport' content='width=device-width,user-scalable=no,initial-scale=1'><style>html,body,div,p,a,span,em,i,h1,h2,h3,input{margin:0;padding:0;border:none;outline:none;box-sizing:border-box}body{background:#f1f1f1;color:#123;text-align:center;min-width:300px;font:12px/1.5 Tahoma,'Microsoft YaHei'}a:link,a:active,a:visited,a{text-decoration:none;color:#123}input[type=submit]{-webkit-appearance:none</style></head><body>";
@@ -22,7 +27,8 @@ $h['foot'] = "<style>.foot{margin:30px auto;font-size:18px}.foot a{color:#ddd;te
 $h['cssm'] = 'width:100%;position:absolute;top:45%;left:50%;text-align:center;transform:translate(-50%,-50%);';
 
 //禁止外网访问
-if($host != '127.0.0.1' && $host != 'localhost' && !stristr($host,'192.168')){
+$wlist = ['localhost','tens'];
+if(!in_array($host, $wlist) && !filter_var($host, 275)){
 	header('HTTP/1.1 403 Forbidden');
 	msg('禁止访问',4);
 }
@@ -81,7 +87,7 @@ function error(){
 	$dir = dirname(__FILE__).parse_url($url, PHP_URL_PATH);
 	$num = count(explode('/',explode('htdocs/', $dir)[1],-1));
 	$ind = "<?php".PHP_EOL."require(\$_SERVER['DOCUMENT_ROOT'].'/index.php');";
-	if(is_dir($dir) && !is_file($dir.'index.php') && $num<3){
+	if(is_dir($dir) && !is_file($dir.'index.php') && !is_file($dir.'index.html') && $num<3){
 		file_put_contents($dir.'index.php', $ind);
 		header('location:'.$url);die;
 	}
@@ -104,5 +110,5 @@ function msg($str='404',$size='3'){
 function info(){
 	global $h;
 	phpinfo();
-	die("<meta name='viewport' content='width=device-width,user-scalable=no,initial-scale=1'><style>.center .h em{text-shadow:1px 1px #fff}</style>{$h['jquery']}<script>$('.center .h h1').after('<em>{$h['version']}</em>').siblings('a').attr('href','./')</script>");
+	die("<meta name='viewport' content='width=device-width,user-scalable=no,initial-scale=1'>{$h['jquery']}<script>$('.center .h h1').after('<i>{$h['version']}</i>').siblings('a').attr('href','./')</script>");
 }
