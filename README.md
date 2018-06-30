@@ -31,3 +31,13 @@ error_page 404 403 /?error;
 8. 当项目下没有主页,会提醒创建主页
 9. 子目录深度为3层, 防止项目子目录过多问题, 优化你的项目
 10. 更多...
+
+#### 部分截图
+
+![1.png](https://i.loli.net/2018/06/30/5b371e26ec0e4.png)
+![5.png](https://i.loli.net/2018/06/30/5b371e27a3c5b.png)
+![2.png](https://i.loli.net/2018/06/30/5b371e27a3d91.png)
+![6.png](https://i.loli.net/2018/06/30/5b371e27a3f23.png)
+![4.png](https://i.loli.net/2018/06/30/5b371e27a3f9e.png)
+![7.png](https://i.loli.net/2018/06/30/5b371e27a3a07.png)
+![3.png](https://i.loli.net/2018/06/30/5b371e27ad42e.png)
